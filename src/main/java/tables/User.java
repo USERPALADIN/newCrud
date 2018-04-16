@@ -8,7 +8,7 @@ public class User {
 
     @Id
     @Column (name = "id")
-    private  int id;
+    private  String id;
     @Column (name = "name" )
     private  String name;
     @Column (name = "login")
@@ -20,14 +20,14 @@ public class User {
         this.login = login;
     }
 
-    public User( int id,  String name, String login, String password) {
+    public User( String id ,  String name, String login, String password) {
         this.id = id;
         this.name = name;
         this.login = login;
         this.password = password;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -45,7 +45,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "User {" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", login='" + login + '\'' +
