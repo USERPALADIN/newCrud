@@ -1,4 +1,4 @@
-<%@ page import="tables.User" %>
+<%@ page import="table.User" %>
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: ¬£¬Ý¬Ñ¬Õ¬Ö¬Ý¬Ö¬è
@@ -6,8 +6,8 @@
   Time: 13:37
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -28,16 +28,22 @@
     <tbody>
     <c:forEach items="${users}" var="user">
         <tr>
-            <td><c:out value="${user.id}" /></td>
-            <td><c:out value="${user.name}" /></td>
-            <td><c:out value="${user.login}" /></td>
-            <td><c:out value="${user.password}" /></td>
-            <td><a href="UpdateServlet?userId=<c:out value="${user.id}"/>">Update</a></td>
+            <td><c:out value="${user.id}"/></td>
+            <td><c:out value="${user.name}"/></td>
+            <td><c:out value="${user.login}"/></td>
+            <td><c:out value="${user.password}"/></td>
+
+            <td>
+                <form method="GET" action="UpdateServlet">
+                    <input type="hidden" value="<c:out value="${user.id}"/>" name="userId" />
+                    <input type="submit" >Edit</input>
+                </form>
+            </td>
             <td><a href="DeleteServlet?userId=<c:out value="${user.id}"/>">Delete</a></td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
-<p><a href="UpdateServlet">Add User</a></p>
+<p><a href="AddServlet">Add User</a></p>
 </body>
 </html>

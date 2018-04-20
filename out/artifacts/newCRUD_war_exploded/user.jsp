@@ -11,13 +11,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
     <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-    <title>Add new user</title>
+    <title>Update user</title>
 </head>
 <body>
 
-<form method="POST" action='ServletClients' name="frmAddUser">
-    User ID : <input type="text"  name="userId"
+<form method="POST" action='UpdateServlet' name="frmAddUser">
+    User ID : <input type="text" readonly="readonly"  name="userId"
                      value="<c:out value="${user.id}" />" /> <br />
      Name : <input
         type="text" name="name"
