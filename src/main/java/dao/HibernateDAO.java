@@ -1,8 +1,11 @@
 package dao;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import table.User;
+
+import java.util.List;
 
 public class HibernateDAO {
     private Session session;
@@ -28,5 +31,12 @@ public class HibernateDAO {
         User user = (User) session.load(User.class, id);
         session.delete(user);
 
+    }
+    public void updateUser (User user ) throws  HibernateException{
+        session.update(user);
+    }
+    public List getAllUsers () {
+        Criteria criteria = session.createCriteria(User.class);
+        return  criteria.list();
     }
 }
