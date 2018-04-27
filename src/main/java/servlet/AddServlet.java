@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "AddServlet", urlPatterns = "/AddServlet")
+@WebServlet(name = "AddServlet", urlPatterns = "/insertUser")
 public class AddServlet extends HttpServlet {
     private static final String INSERT_OR_EDIT = "/addUser.jsp";
     private UserService userService = new UserService();
@@ -31,7 +31,7 @@ public class AddServlet extends HttpServlet {
         String password = req.getParameter("password");
         User user = new User(name, login, password);
         userService.addNewUser(user);
-        resp.sendRedirect("/ServletClients");
+        resp.sendRedirect("/users_all");
     }
 }
 

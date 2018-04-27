@@ -8,9 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "DeleteServlet", urlPatterns = "/DeleteServlet")
+@WebServlet(name = "DeleteServlet", urlPatterns = "/deleteUser")
 public class DeleteServlet extends HttpServlet {
-    private static final String SERVLET = "/ServletClients";
     private UserService userService = new UserService();
 
     @Override
@@ -18,7 +17,7 @@ public class DeleteServlet extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("userId"));
         userService.deleteUser(id);
 
-        resp.sendRedirect(SERVLET);
+        resp.sendRedirect("/users_all");
 
     }
 }

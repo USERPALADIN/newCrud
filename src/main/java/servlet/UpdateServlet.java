@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "UpdateServlet", urlPatterns = "/UpdateServlet"  )
+@WebServlet(name = "UpdateServlet", urlPatterns = "/updateUser"  )
 public class UpdateServlet extends HttpServlet{
     private static final String INSERT_OR_EDIT = "/user.jsp";
     private UserService userService = new UserService();
@@ -35,7 +35,7 @@ public class UpdateServlet extends HttpServlet{
         User user = new User(name, login, password);
         user.setId(id);
         userService.updateUser(user);
-        resp.sendRedirect("/ServletClients");
+        resp.sendRedirect("/users_all");
     }
 
 }
