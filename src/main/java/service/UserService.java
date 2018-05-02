@@ -1,19 +1,24 @@
 package service;
 
-import dao.UserDaoHibernateImpl;
+import abstractFactory.UserDaoFactory;
+import abstractFactory.UserDaoFactoryImpl;
 import dao.UserDao;
+import dao.UserDaoHibernateImpl;
+import dao.UserDaoJDBCImpl;
 import exception.DbException;
 import table.User;
 
+import java.io.*;
 import java.util.List;
+import java.util.Properties;
 
 public class UserService {
 
-    // private UserDao dao = new UserDaoJDBCImpl();
-       private UserDao dao = new UserDaoHibernateImpl();
+    private UserDaoFactory userDaoFactory = UserDaoFactoryImpl.getInstance();
+    private UserDao dao = userDaoFactory.getUserDao();
 
 
-    public User getUserById(int id)  {
+    public User getUserById(int id) {
         User user = null;
         try {
             user = dao.get(id);
@@ -24,7 +29,7 @@ public class UserService {
 
     }
 
-    public void addNewUser(User user)  {
+    public void addNewUser(User user) {
 
         try {
             dao.insertUser(user);
@@ -34,32 +39,43 @@ public class UserService {
 
     }
 
-    public void deleteUser(int id)  {
+    public void deleteUser(int id) {
         try {
             dao.deleteUser(id);
-        } catch (DbException e){
+        } catch (DbException e) {
             e.printStackTrace();
         }
     }
 
-    public void updateUser(User user)  {
+    public void updateUser(User user) {
         try {
             dao.updateUser(user);
         } catch (DbException e) {
             e.printStackTrace();
         }
     }
+    public User  getByLogin (String login) {
+        User user = null;
+        try {
+            user =   dao.getByLogin(login);
 
-    public List getAllUsers()  {
+        } catch (DbException e) {
+            System.out.println("Такого пользователя нет");
+        }
+        return  user;
+    }
+
+    public List getAllUsers() {
         List<User> users = null;
         try {
             users = dao.getAllUsers();
         } catch (DbException e) {
-           e.printStackTrace();
+            e.printStackTrace();
         }
 
         return users;
     }
+
 
 //    public void printConnectInfo() {
 //        try {

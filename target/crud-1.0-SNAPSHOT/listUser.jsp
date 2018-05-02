@@ -22,6 +22,7 @@
         <th>Name</th>
         <th>Login</th>
         <th>Password</th>
+        <th>Role</th>
         <th colspan=2>Action</th>
     </tr>
     </thead>
@@ -32,18 +33,12 @@
             <td><c:out value="${user.name}"/></td>
             <td><c:out value="${user.login}"/></td>
             <td><c:out value="${user.password}"/></td>
-
-            <td>
-                <form method="GET" action="updateUser">
-                    <input type="hidden" value="<c:out value="${user.id}"/>" name="userId" />
-                    <input type="submit" >Edit</input>
-                </form>
-            </td>
-            <td><a href="deleteUser?userId=<c:out value="${user.id}"/>">Delete</a></td>
+            <td><c:out value="${user.role}"/></td>
+            <td><a href="/admin/update_user?userId=<c:out value="${user.id}"/>">Update</a></td>
+            <td><a href="/admin/delete_user?userId=<c:out value="${user.id}"/>">Delete</a></td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
-<p><a href="insertUser">Add User</a></p>
 </body>
 </html>

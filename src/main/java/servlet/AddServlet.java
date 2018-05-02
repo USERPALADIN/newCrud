@@ -11,15 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "AddServlet", urlPatterns = "/insertUser")
+@WebServlet(name = "AddServlet", urlPatterns = "/insert_user")
 public class AddServlet extends HttpServlet {
-    private static final String INSERT_OR_EDIT = "/addUser.jsp";
+    private static final String INSERT = "/addUser.jsp";
     private UserService userService = new UserService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        RequestDispatcher view = req.getRequestDispatcher(INSERT_OR_EDIT);
+        RequestDispatcher view = req.getRequestDispatcher(INSERT);
         view.forward(req, resp);
 
     }
@@ -29,9 +29,18 @@ public class AddServlet extends HttpServlet {
         String name = req.getParameter("name");
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-        User user = new User(name, login, password);
-        userService.addNewUser(user);
-        resp.sendRedirect("/users_all");
+        String role = "user";
+        RequestDispatcher requestDispatcher;
+        User user = userService.getByLogin(login);
+        if (user != null) {
+            requestDispatcher = req.getRequestDispatcher("/antiHello.jsp");
+            requestDispatcher.forward(req, resp);
+            resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        } else {
+            user = new User(name, login, password, role);
+            userService.addNewUser(user);
+            resp.sendRedirect("/authorization");
+        }
     }
 }
 

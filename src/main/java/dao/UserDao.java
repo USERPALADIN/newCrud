@@ -1,5 +1,6 @@
 package dao;
 
+import abstractFactory.UserDaoFactory;
 import exception.DbException;
 import table.User;
 
@@ -17,4 +18,5 @@ public interface UserDao {
      void updateUser (User user ) throws DbException;
 
      List<User> getAllUsers () throws DbException;
+     User getByLogin(String login) throws DbException;
 }

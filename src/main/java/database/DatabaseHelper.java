@@ -13,8 +13,19 @@ import java.sql.SQLException;
 
 
 public class DatabaseHelper {
+    private static DatabaseHelper databaseHelper;
     private static final String hibernate_show_sql = "true";
     private static final String hibernate_hbm2ddl_auto = "update";
+
+    private DatabaseHelper() {
+    }
+    public static DatabaseHelper getInstance() {
+        if (databaseHelper == null) {
+            databaseHelper = new DatabaseHelper();
+        }
+        return databaseHelper;
+    }
+
     public static Connection getConnection() {
         String user = ("root");
         String password = ("root");
@@ -32,8 +43,9 @@ public class DatabaseHelper {
         }
         return null;
     }
+
     @SuppressWarnings("UnusedDeclaration")
-    public   static  Configuration getMySqlConfiguration() {
+    public static Configuration getMySqlConfiguration() {
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(User.class);
 
@@ -46,10 +58,12 @@ public class DatabaseHelper {
         configuration.setProperty("hibernate.hbm2ddl.auto", hibernate_hbm2ddl_auto);
         return configuration;
     }
-    public  static SessionFactory createSessionFactory(Configuration configuration) {
+
+    public static SessionFactory createSessionFactory(Configuration configuration) {
         StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
         builder.applySettings(configuration.getProperties());
         ServiceRegistry serviceRegistry = builder.build();
         return configuration.buildSessionFactory(serviceRegistry);
     }
+
 }
